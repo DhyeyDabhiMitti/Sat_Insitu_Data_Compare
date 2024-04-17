@@ -45,6 +45,13 @@ filtered_table.Date = filtered_table.Date.dt.date
 
 temp_table = filtered_table[['Date','pd','ps','pv','FieldPhot1hldr','FieldPhot2hldr','Soilmoist5hldr']].reset_index().drop(columns=['index'])
 st.dataframe(temp_table)
+temp_table['days']= temp_table.Date.apply(lambda x: x-temp_table.loc[0,'Date'])
+fig, ax = plt.subplots()
+ax.plot(temp_table['days'], temp_table['pd'])
+ax.set_xlabel('Days')
+ax.set_ylabel('Satellite Data')
+ax.set_title('Simple Line Plot')
+st.pyplot(fig)
 selected_index = st.slider('Select the index of the table: ',min_value=0,max_value=temp_table.shape[0]-1,step=1,value=0)
 selected_date = temp_table.iloc[selected_index,0]
 
