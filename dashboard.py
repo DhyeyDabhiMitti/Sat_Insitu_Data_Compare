@@ -45,7 +45,7 @@ filtered_table.Date = filtered_table.Date.dt.date
 
 temp_table = filtered_table[['Date','pd','ps','pv','FieldPhot1hldr','FieldPhot2hldr','Soilmoist5hldr']].reset_index().drop(columns=['index'])
 st.dataframe(temp_table)
-temp_table['days']= temp_table.Date.apply(lambda x: x-temp_table.loc[0,'Date'])
+temp_table['days']= temp_table.Date.apply(lambda x: (x-temp_table.loc[0,'Date']).days)
 fig, ax = plt.subplots()
 ax.plot(temp_table['days'], temp_table['pd'])
 ax.set_xlabel('Days')
